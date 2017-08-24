@@ -1,0 +1,56 @@
+/*
+    Document   : override
+    Created on : <23.08.17>
+    Author     : <AlLi Pierre Yotti>
+    Description:
+        This is where any of your application specific styles should be included
+*/
+
+
+.oj-flex-bar-middle {
+    margin-top: 20px;
+}
+
+
+.demo-oracle-icon:before {
+    content: url("http://192.168.161.178:7001/ords/pitss_con_lite/r/109/files/static/v3431/pitss_small.gif")
+}
+
+.demo-oracle-icon {
+    width: 47px;
+    height: 18px;
+}
+
+
+.oj-web-applayout-header {
+    background-color: rgb(255, 255, 255);
+}
+#pageContent{
+     background-color: rgb(255, 255, 255);
+}
+
+
+.oj-table-data-cell.oj-selected {
+    background-color: rgb(4, 95, 171);
+    color: rgb(255, 255, 255);
+    
+}
+
+.oj-table.oj-focus .oj-table-data-cell.oj-selected {
+    background-color: #045fab;
+   
+    
+}
+
+.oj-table-hgrid-lines.oj-selected,.oj-table-hgrid-lines.oj-focus {
+     border-bottom: 1px solid rgb(4, 95, 171);
+}
+
+:focus {
+    outline: none !important;
+}
+
+.oj-table-body-row.oj-focus:not(.oj-table-body-row-edit) {
+    outline: none !important;
+}
+

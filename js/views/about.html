@@ -1,0 +1,156 @@
+<!--
+ Copyright (c) 2014, 2017, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+  <h3>About Content Area</h3>
+  <div>
+      To change the content of this section, you will make edits to the about.html file located in the /js/views folder.
+  </div>
+</div>
+ 
+ <p>
+<h3>Simple Table using JavaScript array data</h3>
+ <table id="table" summary="Department List" aria-label="Departments Table"
+       data-bind="ojComponent: {component: 'ojTable', 
+                                data: datasource, 
+                                columnsDefault: {sortable: 'enabled'}, 
+                                columns: [{headerText: 'Department Id', 
+                                           field: 'DepartmentId'},
+                                          {headerText: 'Department Name', 
+                                           field: 'DepartmentName'},
+                                          {headerText: 'Location Id', 
+                                           field: 'LocationId'},
+                                          {headerText: 'Manager Id', 
+                                           field: 'ManagerId'}]}">
+</table>
+ <p>
+<h3>Simple Table which has percent width and height styling</h3>
+ 
+ <table id="table" summary="Department List" aria-label="Departments Table"
+       data-bind="ojComponent: {component: 'ojTable', 
+                                data: datasource, 
+                                columnsDefault: {sortable: 'none'}, 
+                                columns: [{headerText: 'ID', 
+                                           field: 'DepartmentId', 
+                                           style: 'width: 10%'},
+                                          {headerText: 'Department Name', 
+                                           field: 'DepartmentName', 
+                                           style: 'width: 50%'},
+                                          {headerText: 'Loc Id', 
+                                           field: 'LocationId', 
+                                           style: 'width: 20%'},
+                                          {headerText: 'Mgr Id', 
+                                           field: 'ManagerId', 
+                                           style: 'width: 20%'}], 
+                                rootAttributes: {'style':'width: 100%; height:100%;'}}">
+</table>
+
+
+
+<table id="table_3" summary="Department List" aria-label="Departments Table"
+       data-bind="ojComponent: {component: 'ojTable', 
+                                data: datasource, 
+                                selectionMode: {row: 'multiple', column: 'multiple'}, 
+                                columns: [{headerText: 'Department Id', 
+                                           field: 'DepartmentId', 
+                                           id: 'column1'},
+                                          {headerText: 'Department Name', 
+                                           field: 'DepartmentName', 
+                                           id: 'column2'},
+                                          {headerText: 'Location Id', 
+                                           field: 'LocationId', 
+                                           id: 'column3'},
+                                          {headerText: 'Manager Id', 
+                                           field: 'ManagerId', 
+                                           id: 'column4'}]}">
+</table>
+<br><br>
+<label><b>Selection Event</b><br><textarea id="selectionEventLog" style="height: 50px; width: 300px;"></textarea></label>
+<br><br>
+<button id="selectionButton" type="button">Get Current Selection</button>
+<br>
+<textarea id="selectionCurrent" style="height: 50px; width: 300px;"></textarea>
+
+
+
+<!--Using ko.observableArray -->
+
+<div id="tableDemo" class="oj-flex oj-flex-items-pad">
+    <div class="oj-xl-8 oj-lg-8 oj-md-6 oj-flex-item">
+        <table id="table_y" summary="Department List" aria-label="Departments Table"
+               data-bind="ojComponent: {component: 'ojTable', 
+                                    data: datasource_s,
+                                    columnsDefault: {sortable: 'none'}, 
+                                    columns: [{headerText: 'Department Id', 
+                                               field: 'DepartmentId'},
+                                              {headerText: 'Department Name', 
+                                               field: 'DepartmentName'},
+                                              {headerText: 'Location Id', 
+                                               field: 'LocationId'},
+                                              {headerText: 'Manager Id', 
+                                               field: 'ManagerId'}]}">
+        </table>
+    </div>
+    <div class="oj-xl-4 oj-lg-4 oj-md-6 oj-flex-item">
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item deprecated-col-default-width">
+                <label for="spinnercontrol">Department Id</label>
+            </div>
+            <div class="oj-flex-item deprecated-col-default-width">
+                <input id="departmentIdInput"
+                       data-bind="ojComponent: {
+                       component: 'ojInputNumber',
+                       max: 2000, min: 0, step: 1, value: inputDepartmentIds}"/>
+            </div>
+        </div>     
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item deprecated-col-default-width">
+                <label for="inputcontrol">Department Name</label>
+            </div>
+            <div class="oj-flex-item deprecated-col-default-width">
+                <input id="departmentNameInput"
+                       data-bind="ojComponent: {
+                       component: 'ojInputText', 
+                       value: inputDepartmentName}"/> 
+            </div>
+        </div>             
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item deprecated-col-default-width">
+                <label for="spinnercontrol">Location Id</label>
+            </div>
+            <div class="oj-flex-item deprecated-col-default-width">
+                <input id="locationIdInput"
+                       data-bind="ojComponent: {
+                       component: 'ojInputNumber',
+                       max: 300, min: 0, step: 1, value: inputLocationId}"/>
+            </div>
+        </div>     
+        <div class="oj-flex oj-flex-items-pad">
+            <div class="oj-flex-item deprecated-col-default-width">
+                <label for="spinnercontrol">Manager Id</label>
+            </div>
+            <div class="oj-flex-item deprecated-col-default-width">
+                <input id="managerIdInput"
+                       data-bind="ojComponent: {
+                       component: 'ojInputNumber',
+                       max: 300, min: 0, step: 1, value: inputManagerId}"/>
+            </div>
+        </div> 
+        <div class="oj-flex oj-flex-items-pad">
+            <button id="addbutton"
+                    data-bind="click: addRow, 
+                    ojComponent: { component: 'ojButton', label: 'Add to end' }">
+            </button>
+
+            <button id="updateButton"
+                    data-bind="click: updateRow, 
+                    ojComponent: { component: 'ojButton', label: 'Update' }">
+            </button>          
+            <button id="removeButton"
+                    data-bind="click: removeRow, 
+                    ojComponent: { component: 'ojButton', label: 'Remove' }">
+            </button>                                                                                                                
+        </div>
+    </div>
+</div>
