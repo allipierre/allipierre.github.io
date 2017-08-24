@@ -5,11 +5,42 @@
 /*
  * Your incidents ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/ojmodel', 'ojs/ojtable', 'ojs/ojcollectiontabledatasource'],
  function(oj, ko, $) {
   
     function IncidentsViewModel() {
-      var self = this;
+     self.DeptCol = ko.observable();
+self.datasource = ko.observable();
+
+self.serviceURL = 'https://apex.oracle.com/pls/apex/pierrealli/hr/employees/';
+self.parseDept = function(response) {
+    return {empno: response['empno'],
+        DepartmentName: response['ename'],
+        LocationId: response['job'],
+        ManagerId: response['hiredate'],
+        mgr: response['mgr'],
+        sal: response['sal'],
+        comm: response['comm'],
+        deptno: response['deptno']};
+};
+self.Department = oj.Model.extend({
+    urlRoot: self.serviceURL,
+    parse: self.parseDept,
+    idAttribute: 'empno'
+});
+
+self.myDept = new self.Department();
+self.DeptCollection = oj.Collection.extend({
+    url: self.serviceURL,
+    model: self.myDept
+});
+
+self.DeptCol(new self.DeptCollection());
+   $.getJSON("https://apex.oracle.com/pls/apex/pierrealli/hr/employees/",
+            function (data) {
+                         
+                        self.datasource(new oj.CollectionTableDataSource(self.DeptCol()));
+                      }); 
       // Below are a subset of the ViewModel methods invoked by the ojModule binding
       // Please reference the ojModule jsDoc for additionaly available methods.
 

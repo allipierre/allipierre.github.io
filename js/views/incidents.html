@@ -8,3 +8,44 @@
       To change the content of this section, you will make edits to the incidents.html file located in the /js/views folder.
   </div>
 </div>
+
+ <table id="tablep" summary="Department List" aria-label="Departments Table" 
+       data-bind="ojComponent:{  
+   component:'ojTable',
+   data:datasource,
+   columns:[  
+      {  
+         headerText:'empno',
+         field:'empno'
+      },
+      {  
+         headerText:'ename',
+         field:'DepartmentName'
+      },
+      {  
+         headerText:'job',
+         field:'LocationId'
+      },
+      {  
+         headerText:'hiredate',
+         field:'ManagerId'
+      },
+      {  
+         headerText:'mgr',
+         field:'mgr'
+      },
+      {  
+         headerText:'sal',
+         field:'sal'
+      },
+      {  
+         headerText:'comm',
+         field:'comm'
+      },
+      {  
+         headerText:'deptno',
+         field:'deptno'
+      }
+   ]
+}"> 
+</table>

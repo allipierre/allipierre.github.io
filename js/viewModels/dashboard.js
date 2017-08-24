@@ -65,6 +65,139 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable','ojs
       self.handleDetached = function(info) {
         // Implement if needed
       };
+      var a= [
+        { 
+          "title": "Home",
+          "attr": {"id": "home"}
+        },
+        { 
+          "title": "News",
+          "attr": {"id": "news"}
+        },
+        { 
+          "title": "Blogs",
+          "attr": {"id": "blogs"},
+          "children": [ ]
+        },
+        {
+          "title": "Links", 
+          "attr": {"id": "links"},
+          "children": [ ]
+        },
+        { 
+          "title": "Sponsors",
+          "attr": {"id": "sponsors"}
+        },
+        { 
+          "title": "Corporate",
+          "attr": {"id": "corporate"}
+        },
+        { 
+          "title": "References",
+          "attr": {"id": "references"},
+          "children": [ ]
+        },
+        { 
+          "title": "Suppliers",
+          "attr": {"id": "sups"},
+          "children": [ ]
+        }
+      ]
+      ;
+         self.loadNode= function(node) {
+     if (node === -1) {
+        // Requesting node data for Tree.
+        return "https://www.jstree.com/fiddle/" ;
+     }
+     else {
+        // Requesting node data for a particular node
+        return "https://www.jstree.com/fiddle/"
+                      + node.children("id") + ".json";
+     }
+  };
+  
+   self.loadSuccess= function(data, status, obj) {
+      // Data successfully retrieved.  Can optionally transform
+      // it and return it here if required.
+  };
+
+   self.loadError= function(reason, feedback, obj) {
+     // Ajax error.  Look at reason and feedback.message ;
+  };
+  
+  self.getJson= function(node, fn) {
+      // get local json
+    var data = [
+                 { 
+                   "title": "News",
+                   "attr": {"id": "news"}
+                 },
+                 { 
+                   "title": "Blogs",
+                   "attr": {"id": "blogs"},
+                   "children": [ { "title": "Today",
+                                   "attr": {"id": "today"}
+                                 },
+                                 { "title": "Yesterday",
+                                   "attr": {"id": "yesterday"}
+                                 },
+                                 { "title": "Archive",
+                                   "attr": {"id": "archive"}
+                                 }
+                               ]
+                 },
+                 {
+                   "title": "Links", 
+                   "attr": {"id": "links"},
+                   "children": [ { "title": "Oracle",
+                                   "attr": {"id": "oracle"}
+                                 },
+                                 { "title": "IBM",
+                                   "attr": {"id": "ibm"}
+                                 },
+                                 { "title": "Microsoft",
+                                   "attr": {"id": "ms"},
+                                   "children": [ { "title": "USA",
+                                                   "attr": {"id": "msusa"},
+                                                   "children": [ { "title": "North",
+                                                                   "attr": {"id": "msusanorth"}
+                                                                 },
+                                                                 { "title": "South",
+                                                                   "attr": {"id": "msusasouth"}
+                                                                 },
+                                                                 { "title": "East",
+                                                                   "attr": {"id": "msusaeast"}
+                                                                 },
+                                                                 { "title": "West",
+                                                                   "attr": {"id": "msusawest"}
+                                                                 }
+                                                               ]
+                                                 },
+                                                 { "title": "Europe",
+                                                   "attr": {"id": "msuerope"}
+                                                 },
+                                                 { "title": "Asia",
+                                                   "attr": {"id": "msasia"},
+                                                   "children": [ { "title": "Japan",
+                                                                   "attr": {"id": "asiajap"}
+                                                                 },
+                                                                 { "title": "China",
+                                                                   "attr": {"id": "asiachina"}
+                                                                 },
+                                                                 { "title": "India",
+                                                                   "attr": {"id": "asiaindia"}
+                                                                 }
+                                                               ]
+                                                 }
+                                               ]
+                                 }
+                               ]
+                 }
+              ];
+
+     fn(data) ;  // pass to ojTree using supplied function
+  };
+  
     }
 
 $(document).ready
@@ -72,7 +205,7 @@ $(document).ready
     function()
     {
      
-     ko.applyBindings(null, document.getElementById('tree'));
+    
         
         $("#tree").on("ojoptionchange", function(e, ui) {
             if (ui.option === "selection") {
@@ -81,36 +214,20 @@ $(document).ready
                 $("#results").html("<label> id = " + selected + "</label>");
             }
         });
+        $("#trees").on("ojoptionchange", function(e, ui) {
+                 if (ui.option == "selection") {
+                   // show selected nodes
+                   var selected = _arrayToStr(ui.value) ;
+                   $("#resultss").text("id = " + selected) ;
+                 }
+              });
 
     }
   );
    return   getDashboardViewModel();
     
     
-    function  loadNode(node)
-  {
-     if (node === -1) {
-        // Requesting node data for Tree.
-        return "http://www.oracle.com/webfolder/technetwork/jet/demo/cookbook/dataCollections/tree/treeLazyLoadAjax/json/root.json" ;
-     }
-     else {
-        // Requesting node data for a particular node
-        return "http://www.oracle.com/webfolder/technetwork/jet/demo/cookbook/dataCollections/tree/treeLazyLoadAjax/json/root.json/"
-                      + node.attr("id") + ".json";
-     }
-  };
-  
-  function  loadSuccess(data, status, obj)
-  {
-      // Data successfully retrieved.  Can optionally transform
-      // it and return it here if required.
-  };
-
-  function loadError(reason, feedback, obj)
-  {
-     // Ajax error.  Look at reason and feedback.message ;
-  };
-  
+   
    // Convert a jQuery list of html element nodes to string containing node id's.
   function _arrayToStr(arr)
   {
@@ -126,7 +243,7 @@ $(document).ready
      return s ;
   };
   function getDashboardViewModel(){
-       return new DashboardViewModel();
+       return  new DashboardViewModel();
   }
 
   }
