@@ -8,3 +8,44 @@
       To change the content of this section, you will make edits to the customers.html file located in the /js/views folder.
   </div>
 </div>
+
+ <table id="table" summary="Department List" aria-label="Departments Table" 
+       data-bind="ojComponent:{  
+   component:'ojTable',
+   data:datasource,
+   columns:[  
+      {  
+         headerText:'empno',
+         field:'empno'
+      },
+      {  
+         headerText:'ename',
+         field:'ename'
+      },
+      {  
+         headerText:'job',
+         field:'job'
+      },
+      {  
+         headerText:'hiredate',
+         field:'hiredate'
+      },
+      {  
+         headerText:'mgr',
+         field:'mgr'
+      },
+      {  
+         headerText:'sal',
+         field:'sal'
+      },
+      {  
+         headerText:'comm',
+         field:'comm'
+      },
+      {  
+         headerText:'deptno',
+         field:'deptno'
+      }
+   ]
+}"> 
+</table>

@@ -5,11 +5,36 @@
 /*
  * Your customer ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable'],
  function(oj, ko, $) {
   
     function CustomerViewModel() {
-      var self = this;
+     var self = this;
+     //var employees='employees/';
+    self.data = ko.observableArray();
+        self.data = ko.observableArray();
+        $.getJSON("https://apex.oracle.com/pls/apex/pierrealli/hr/employees/").
+                then(function (pData) {
+                   for (var i=0; i < pData.items.length; i++){
+                        self.data.push({
+                            empno: pData.items[i].empno,
+                            ename: pData.items[i].ename,
+                            job: pData.items[i].job,
+                            hiredate: pData.items[i].hiredate,
+                            mgr: pData.items[i].mgr,
+                            sal: pData.items[i].sal,
+                            comm: pData.items[i].comm,
+                            deptno: pData.items[i].deptno
+                        });
+                   }
+                });
+        self.datasource = new oj.ArrayTableDataSource(
+                self.data, 
+                {idAttribute: 'empno'}
+        );
+
+    
+     
       // Below are a subset of the ViewModel methods invoked by the ojModule binding
       // Please reference the ojModule jsDoc for additionaly available methods.
 
@@ -72,6 +97,6 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
      * each time the view is displayed.  Return an instance of the ViewModel if
      * only one instance of the ViewModel is needed.
      */
-    return new CustomerViewModel();
+    return  new CustomerViewModel();
   }
 );
