@@ -5,7 +5,7 @@
 /*
  * Your dashboard ViewModel code goes here
  */
-define(['ojs/ojcore', 'knockout', 'jquery'],
+define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable','ojs/ojtree'],
  function(oj, ko, $) {
   
     function DashboardViewModel() {
@@ -67,11 +67,67 @@ define(['ojs/ojcore', 'knockout', 'jquery'],
       };
     }
 
-    /*
-     * Returns a constructor for the ViewModel so that the ViewModel is constrcuted
-     * each time the view is displayed.  Return an instance of the ViewModel if
-     * only one instance of the ViewModel is needed.
-     */
-    return new DashboardViewModel();
+$(document).ready
+  (
+    function()
+    {
+     
+     ko.applyBindings(null, document.getElementById('tree'));
+        
+        $("#tree").on("ojoptionchange", function(e, ui) {
+            if (ui.option === "selection") {
+                // show selected nodes
+                var selected = _arrayToStr(ui.value);
+                $("#results").html("<label> id = " + selected + "</label>");
+            }
+        });
+
+    }
+  );
+   return   getDashboardViewModel();
+    
+    
+    function  loadNode(node)
+  {
+     if (node === -1) {
+        // Requesting node data for Tree.
+        return "http://www.oracle.com/webfolder/technetwork/jet/demo/cookbook/dataCollections/tree/treeLazyLoadAjax/json/root.json" ;
+     }
+     else {
+        // Requesting node data for a particular node
+        return "http://www.oracle.com/webfolder/technetwork/jet/demo/cookbook/dataCollections/tree/treeLazyLoadAjax/json/root.json/"
+                      + node.attr("id") + ".json";
+     }
+  };
+  
+  function  loadSuccess(data, status, obj)
+  {
+      // Data successfully retrieved.  Can optionally transform
+      // it and return it here if required.
+  };
+
+  function loadError(reason, feedback, obj)
+  {
+     // Ajax error.  Look at reason and feedback.message ;
+  };
+  
+   // Convert a jQuery list of html element nodes to string containing node id's.
+  function _arrayToStr(arr)
+  {
+     var s = "" ;
+     $.each(arr, function(i, val)
+        {
+          if (i) {
+            s += ", " ;
+          }
+          s += $(arr[i]).attr("id") ;
+        }) ;
+
+     return s ;
+  };
+  function getDashboardViewModel(){
+       return new DashboardViewModel();
+  }
+
   }
 );
