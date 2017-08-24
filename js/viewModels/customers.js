@@ -27,6 +27,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable','ojs
                             deptno: pData.items[i].deptno
                         });
                    }
+                    $('#trees').ojTree("refresh");
                 });
         self.datasource = new oj.ArrayTableDataSource(
                 self.data, 
@@ -100,13 +101,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable','ojs
      
      
         
-        $("#tree").on("ojoptionchange", function(e, ui) {
-            if (ui.option === "selection") {
-                // show selected nodes
-                var selected = _arrayToStr(ui.value);
-                $("#results").html("<label> id = " + selected + "</label>");
-            }
-        });
+        
 
     }
   );
@@ -121,45 +116,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'ojs/ojtable','ojs
     return   getCustomerViewModel();
     
     
-    function  loadNode(node)
-  {
-     if (node === -1) {
-        // Requesting node data for Tree.
-        return "http://www.oracle.com/webfolder/technetwork/jet/demo/cookbook/dataCollections/tree/treeLazyLoadAjax/json/root.json" ;
-     }
-     else {
-        // Requesting node data for a particular node
-        return "http://www.oracle.com/webfolder/technetwork/jet/demo/cookbook/dataCollections/tree/treeLazyLoadAjax/json/root.json/"
-                      + node.attr("id") + ".json";
-     }
-  };
-  
-  function  loadSuccess(data, status, obj)
-  {
-      // Data successfully retrieved.  Can optionally transform
-      // it and return it here if required.
-  };
-
-  function loadError(reason, feedback, obj)
-  {
-     // Ajax error.  Look at reason and feedback.message ;
-  };
-  
-   // Convert a jQuery list of html element nodes to string containing node id's.
-  function _arrayToStr(arr)
-  {
-     var s = "" ;
-     $.each(arr, function(i, val)
-        {
-          if (i) {
-            s += ", " ;
-          }
-          s += $(arr[i]).attr("id") ;
-        }) ;
-
-     return s ;
-  };
-  function getCustomerViewModel(){
+      function getCustomerViewModel(){
        return new CustomerViewModel();
   }
 
