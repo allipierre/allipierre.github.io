@@ -54,3 +54,25 @@
     outline: none !important;
 }
 
+.oj-selected .demo-area-vert:before, .oj-selected.demo-area-vert:before, a:checked.demo-area-vert:before, a:checked .demo-area-vert:before {
+    content: url(http://www.oracle.com/webfolder/technetwork/jet/css/samples/cookbook/images/dvt/area_vert_dwn.svg);
+}
+
+.oj-hover .demo-area-horiz:before, .oj-hover.demo-area-horiz:before, a:hover.demo-area-horiz:before, a:hover .demo-area-horiz:before {
+    content: url(http://www.oracle.com/webfolder/technetwork/jet/css/samples/cookbook/images/dvt/area_horiz_ovr.svg);
+}
+
+.demo-area-stack:before {
+    content: url(http://www.oracle.com/webfolder/technetwork/jet/css/samples/cookbook/images/dvt/area_stack_ena.svg);
+}
+
+@media (max-width: 700px){
+ .oj-flex {
+    display: block;
+}
+
+.oj-sm-4 {
+    max-width: 100%;
+    width: 100%;
+}
+} 

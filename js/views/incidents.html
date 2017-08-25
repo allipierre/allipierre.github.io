@@ -8,7 +8,53 @@
       To change the content of this section, you will make edits to the incidents.html file located in the /js/views folder.
   </div>
 </div>
-
+<div class="oj-flex oj-flex-items-pad oj-md-only-hide">
+    <div class="oj-sm-4 oj-md-3 oj-flex-item">
+       <div id='chart-container'>
+    <div id="areaChart" data-bind="ojComponent: {
+            component: 'ojChart', 
+            type: 'area', 
+            series: areaSeriesValue, 
+            groups: areaGroupsValue, 
+            animationOnDisplay: 'auto',
+            animationOnDataChange: 'auto',
+            orientation: orientationValue,
+            stack: stackValue,
+            hoverBehavior: 'dim'
+         }"
+         style="max-width:500px;width:100%;height:350px;">
+    </div>
+    <div id="myToolbar" aria-label="Chart Display Options Toolbar" aria-controls="areaChart"
+       data-bind="ojComponent: {component:'ojToolbar'}"
+       style="max-width:500px;width:100%;">
+        <!-- vertical/horizontal toggle button -->
+        <div id="radioButtonset" data-bind="ojComponent: {component: 'ojButtonset', focusManagement:'none', checked: orientationValue, chroming: 'half'}" 
+             aria-label="Choose an orientation.">
+            <!-- ko foreach: orientationOptions -->
+              <label data-bind="attr: {for: id}"></label>
+              <input type="radio" name="orientation"
+                   data-bind="value: value, attr: {id: id},
+                   ojComponent: {component: 'ojButton', label: label, 
+                                     icons: {start: icon}, display: 'icons'}"/>
+            <!-- /ko -->
+        </div>
+        <span role="separator" aria-orientation="vertical" class="oj-toolbar-separator"></span>
+        <!-- unstacked/stacked toggle button -->
+        <div id="radioButtonset2" data-bind="ojComponent: {component: 'ojButtonset', focusManagement:'none', checked: stackValue, chroming: 'half'}" 
+             aria-label="Choose a stack setting.">
+            <!-- ko foreach: stackOptions -->
+              <label data-bind="attr: {for: id}"></label>
+              <input type="radio" name="stack"
+                   data-bind="value: value, attr: {id: id},
+                   ojComponent: {component: 'ojButton', label: label, 
+                                     icons: {start: icon}, display: 'icons'}"/>
+            <!-- /ko -->
+        </div>
+    </div>
+</div> 
+       
+    </div>
+ <div class="oj-sm-4 oj-md-6 oj-flex-item">
  <table id="tablep" summary="Department List" aria-label="Departments Table" 
        data-bind="ojComponent:{  
    component:'ojTable',
@@ -44,8 +90,53 @@
       },
       {  
          headerText:'deptno',
-         field:'deptno'
-      }
-   ]
-}"> 
+         field:'deptno', 
+                                           style: 'width: 20%'}], 
+                                rootAttributes: {'style':'width: 100%; height: 400px;'}}">
 </table>
+     </div>
+    <div class="oj-sm-4 oj-md-3 oj-flex-item">
+<div id='chart-container'>
+    <div id="barChart" data-bind="ojComponent: {
+            component: 'ojChart', 
+            type: 'bar', 
+            orientation: orientationValue,
+            stack: stackValue,
+            series: barSeriesValue, 
+            groups: barGroupsValue, 
+            animationOnDisplay: 'auto',
+            animationOnDataChange: 'auto',
+            hoverBehavior: 'dim'
+        }"
+         style="max-width:500px;width:100%;height:350px;">
+    </div>
+    <div id="myToolbar" aria-label="Chart Display Options Toolbar" aria-controls="barChart"
+       data-bind="ojComponent: {component:'ojToolbar'}"
+       style="max-width:500px;width:100%;">
+        <!-- vertical/horizontal toggle button -->
+        <div id="radioButtonset" data-bind="ojComponent: {component: 'ojButtonset', focusManagement:'none', checked: orientationValue, chroming: 'half'}" 
+             aria-label="Choose an orientation.">
+            <!-- ko foreach: orientationOptions -->
+              <label data-bind="attr: {for: id}"></label>
+              <input type="radio" name="orientation"
+                   data-bind="value: value, attr: {id: id},
+                   ojComponent: {component: 'ojButton', label: label, 
+                                     icons: {start: icon}, display: 'icons'}"/>
+            <!-- /ko -->
+        </div>
+        <span role="separator" aria-orientation="vertical" class="oj-toolbar-separator"></span>
+        <!-- unstacked/stacked toggle button -->
+        <div id="radioButtonset2" data-bind="ojComponent: {component: 'ojButtonset', focusManagement:'none', checked: stackValue, chroming: 'half'}" 
+             aria-label="Choose a stack setting.">
+            <!-- ko foreach: stackOptions -->
+              <label data-bind="attr: {for: id}"></label>
+              <input type="radio" name="stack"
+                   data-bind="value: value, attr: {id: id},
+                   ojComponent: {component: 'ojButton', label: label, 
+                                     icons: {start: icon}, display: 'icons'}"/>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+    </div>
+    </div>
