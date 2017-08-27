@@ -1,0 +1,210 @@
+<!--
+ Copyright (c) 2014, 2017, Oracle and/or its affiliates.
+ The Universal Permissive License (UPL), Version 1.0
+ -->
+<div class="oj-hybrid-padding">
+  <h3>Incidents Content Area</h3>
+  <div>
+      To change the content of this section, you will make edits to the incidents.html file located in the /js/views folder.
+  </div>
+</div>
+
+<div class="oj-flex">
+    <div class="oj-flex-item oj-panel oj-margin">
+       <div id='chart-container'>
+    <div id="areaChart" data-bind="ojComponent: {
+            component: 'ojChart', 
+            type: 'area', 
+            series: areaSeriesValue, 
+            groups: areaGroupsValue, 
+            animationOnDisplay: 'auto',
+            animationOnDataChange: 'auto',
+            orientation: orientationValue,
+            stack: stackValue,
+            hoverBehavior: 'dim'
+         }"
+         style="max-width:500px;width:100%;height:350px;">
+    </div>
+    <div id="myToolbar" aria-label="Chart Display Options Toolbar" aria-controls="areaChart"
+       data-bind="ojComponent: {component:'ojToolbar'}"
+       style="max-width:500px;width:100%;">
+        <!-- vertical/horizontal toggle button -->
+        <div id="radioButtonset" data-bind="ojComponent: {component: 'ojButtonset', focusManagement:'none', checked: orientationValue, chroming: 'half'}" 
+             aria-label="Choose an orientation.">
+            <!-- ko foreach: orientationOptions -->
+              <label data-bind="attr: {for: id}"></label>
+              <input type="radio" name="orientation"
+                   data-bind="value: value, attr: {id: id},
+                   ojComponent: {component: 'ojButton', label: label, 
+                                     icons: {start: icon}, display: 'icons'}"/>
+            <!-- /ko -->
+        </div>
+        <span role="separator" aria-orientation="vertical" class="oj-toolbar-separator"></span>
+        <!-- unstacked/stacked toggle button -->
+        <div id="radioButtonset2" data-bind="ojComponent: {component: 'ojButtonset', focusManagement:'none', checked: stackValue, chroming: 'half'}" 
+             aria-label="Choose a stack setting.">
+            <!-- ko foreach: stackOptions -->
+              <label data-bind="attr: {for: id}"></label>
+              <input type="radio" name="stack"
+                   data-bind="value: value, attr: {id: id},
+                   ojComponent: {component: 'ojButton', label: label, 
+                                     icons: {start: icon}, display: 'icons'}"/>
+            <!-- /ko -->
+        </div>
+    </div>
+</div> 
+       
+    </div>
+ <div class="oj-flex-item oj-panel oj-margin">
+ <table id="tablep" summary="Department List" aria-label="Departments Table" 
+       data-bind="ojComponent:{  
+   component:'ojTable',
+   data:datasource,
+   columns:[  
+      {  
+         headerText:'empno',
+         field:'empno'
+      },
+      {  
+         headerText:'ename',
+         field:'DepartmentName'
+      },
+      {  
+         headerText:'job',
+         field:'LocationId'
+      },
+      {  
+         headerText:'hiredate',
+         field:'ManagerId'
+      },
+      {  
+         headerText:'mgr',
+         field:'mgr'
+      },
+      {  
+         headerText:'sal',
+         field:'sal'
+      },
+      {  
+         headerText:'comm',
+         field:'comm'
+      },
+      {  
+         headerText:'deptno',
+         field:'deptno', 
+                                           style: 'width: 20%'}], 
+                                rootAttributes: {'style':'width: 660px; height: 400px;'}}">
+</table>
+     </div>
+    <div class="oj-flex-item oj-panel oj-margin">
+<div id='chart-container'>
+    <div id="barChart" data-bind="ojComponent: {
+            component: 'ojChart', 
+            type: 'bar', 
+            orientation: orientationValue,
+            stack: stackValue,
+            series: barSeriesValue, 
+            groups: barGroupsValue, 
+            animationOnDisplay: 'auto',
+            animationOnDataChange: 'auto',
+            hoverBehavior: 'dim'
+        }"
+         style="max-width:500px;width:100%;height:350px;">
+    </div>
+    <div id="myToolbar" aria-label="Chart Display Options Toolbar" aria-controls="barChart"
+       data-bind="ojComponent: {component:'ojToolbar'}"
+       style="max-width:500px;width:100%;">
+        <!-- vertical/horizontal toggle button -->
+        <div id="radioButtonset" data-bind="ojComponent: {component: 'ojButtonset', focusManagement:'none', checked: orientationValue, chroming: 'half'}" 
+             aria-label="Choose an orientation.">
+            <!-- ko foreach: orientationOptions -->
+              <label data-bind="attr: {for: id}"></label>
+              <input type="radio" name="orientation"
+                   data-bind="value: value, attr: {id: id},
+                   ojComponent: {component: 'ojButton', label: label, 
+                                     icons: {start: icon}, display: 'icons'}"/>
+            <!-- /ko -->
+        </div>
+        <span role="separator" aria-orientation="vertical" class="oj-toolbar-separator"></span>
+        <!-- unstacked/stacked toggle button -->
+        <div id="radioButtonset2" data-bind="ojComponent: {component: 'ojButtonset', focusManagement:'none', checked: stackValue, chroming: 'half'}" 
+             aria-label="Choose a stack setting.">
+            <!-- ko foreach: stackOptions -->
+              <label data-bind="attr: {for: id}"></label>
+              <input type="radio" name="stack"
+                   data-bind="value: value, attr: {id: id},
+                   ojComponent: {component: 'ojButton', label: label, 
+                                     icons: {start: icon}, display: 'icons'}"/>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+    </div>
+    </div>
+ <div class="oj-flex">
+    <div class="oj-flex-item oj-flex oj-panel oj-margin oj-sm-flex-wrap-nowrap oj-sm-only-flex-direction-column">
+        <div class="oj-flex-item  oj-panel oj-margin">
+        Concise HTML
+
+Semantic UI treats words and classes as exchangeable concepts.
+
+Classes use syntax from natural languages like noun/modifier relationships, word order, and plurality to link concepts intuitively.
+
+Get the same benefits as BEM or SMACSS, but without the tedium.
+        </div>
+        <div class="oj-flex-item oj-panel oj-margin">
+        Concise HTML
+
+Semantic UI treats words and classes as exchangeable concepts.
+
+Classes use syntax from natural languages like noun/modifier relationships, word order, and plurality to link concepts intuitively.
+
+Get the same benefits as BEM or SMACSS, but without the tedium.
+    </div>
+        
+    </div>
+     
+     <div class="oj-flex-item oj-panel oj-margin">
+        Concise HTML
+
+Semantic UI treats words and classes as exchangeable concepts.
+
+Classes use syntax from natural languages like noun/modifier relationships, word order, and plurality to link concepts intuitively.
+
+Get the same benefits as BEM or SMACSS, but without the tedium.
+    </div>
+     
+     <div class="oj-flex-item oj-panel oj-margin">
+        Concise HTML
+
+Semantic UI treats words and classes as exchangeable concepts.
+
+Classes use syntax from natural languages like noun/modifier relationships, word order, and plurality to link concepts intuitively.
+
+Get the same benefits as BEM or SMACSS, but without the tedium.
+    </div>
+     
+     
+     <div class="oj-flex-item oj-flex oj-panel oj-margin oj-sm-flex-wrap-nowrap oj-sm-only-flex-direction-column">
+        <div class="oj-flex-item  oj-panel oj-margin">
+        Concise HTML
+
+Semantic UI treats words and classes as exchangeable concepts.
+
+Classes use syntax from natural languages like noun/modifier relationships, word order, and plurality to link concepts intuitively.
+
+Get the same benefits as BEM or SMACSS, but without the tedium.
+        </div>
+        <div class="oj-flex-item oj-panel oj-margin">
+        Concise HTML
+
+Semantic UI treats words and classes as exchangeable concepts.
+
+Classes use syntax from natural languages like noun/modifier relationships, word order, and plurality to link concepts intuitively.
+
+Get the same benefits as BEM or SMACSS, but without the tedium.
+    </div>
+        
+    </div>
+     
+</div>

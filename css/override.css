@@ -65,7 +65,7 @@
 .demo-area-stack:before {
     content: url(http://www.oracle.com/webfolder/technetwork/jet/css/samples/cookbook/images/dvt/area_stack_ena.svg);
 }
-
+/*
 @media (max-width: 700px){
  .oj-flex {
     display: block;
@@ -75,4 +75,4 @@
     max-width: 100%;
     width: 100%;
 }
-} 
+} */

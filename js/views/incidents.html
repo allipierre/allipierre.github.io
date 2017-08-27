@@ -1,6 +1,7 @@
 <!--
  Copyright (c) 2014, 2017, Oracle and/or its affiliates.
  The Universal Permissive License (UPL), Version 1.0
+oj-sm-only-hide oj-md-only-hide
  -->
 <div class="oj-hybrid-padding">
   <h3>Incidents Content Area</h3>
@@ -8,8 +9,8 @@
       To change the content of this section, you will make edits to the incidents.html file located in the /js/views folder.
   </div>
 </div>
-<div class="oj-flex oj-flex-items-pad oj-md-only-hide">
-    <div class="oj-sm-4 oj-md-3 oj-flex-item">
+<div class="oj-flex oj-flex-items-pad oj-sm-only-flex-direction-column">
+    <div class="oj-sm-12 oj-md-3 oj-flex-item">
        <div id='chart-container'>
     <div id="areaChart" data-bind="ojComponent: {
             component: 'ojChart', 
@@ -54,7 +55,7 @@
 </div> 
        
     </div>
- <div class="oj-sm-4 oj-md-6 oj-flex-item">
+ <div class="oj-sm-12 oj-md-6 oj-flex-item">
  <table id="tablep" summary="Department List" aria-label="Departments Table" 
        data-bind="ojComponent:{  
    component:'ojTable',
@@ -95,7 +96,241 @@
                                 rootAttributes: {'style':'width: 100%; height: 400px;'}}">
 </table>
      </div>
-    <div class="oj-sm-4 oj-md-3 oj-flex-item">
+    <div class="oj-sm-12 oj-md-3 oj-flex-item">
+<div id='chart-container'>
+    <div id="barChart" data-bind="ojComponent: {
+            component: 'ojChart', 
+            type: 'bar', 
+            orientation: orientationValue,
+            stack: stackValue,
+            series: barSeriesValue, 
+            groups: barGroupsValue, 
+            animationOnDisplay: 'auto',
+            animationOnDataChange: 'auto',
+            hoverBehavior: 'dim'
+        }"
+         style="max-width:500px;width:100%;height:350px;">
+    </div>
+    <div id="myToolbar" aria-label="Chart Display Options Toolbar" aria-controls="barChart"
+       data-bind="ojComponent: {component:'ojToolbar'}"
+       style="max-width:500px;width:100%;">
+        <!-- vertical/horizontal toggle button -->
+        <div id="radioButtonset" data-bind="ojComponent: {component: 'ojButtonset', focusManagement:'none', checked: orientationValue, chroming: 'half'}" 
+             aria-label="Choose an orientation.">
+            <!-- ko foreach: orientationOptions -->
+              <label data-bind="attr: {for: id}"></label>
+              <input type="radio" name="orientation"
+                   data-bind="value: value, attr: {id: id},
+                   ojComponent: {component: 'ojButton', label: label, 
+                                     icons: {start: icon}, display: 'icons'}"/>
+            <!-- /ko -->
+        </div>
+        <span role="separator" aria-orientation="vertical" class="oj-toolbar-separator"></span>
+        <!-- unstacked/stacked toggle button -->
+        <div id="radioButtonset2" data-bind="ojComponent: {component: 'ojButtonset', focusManagement:'none', checked: stackValue, chroming: 'half'}" 
+             aria-label="Choose a stack setting.">
+            <!-- ko foreach: stackOptions -->
+              <label data-bind="attr: {for: id}"></label>
+              <input type="radio" name="stack"
+                   data-bind="value: value, attr: {id: id},
+                   ojComponent: {component: 'ojButton', label: label, 
+                                     icons: {start: icon}, display: 'icons'}"/>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+    </div>
+    </div>
+ 
+ 
+ 
+ 
+ 
+ <div class="oj-flex oj-flex-items-pad oj-sm-only-flex-direction-column">
+    <div class="oj-sm-12 oj-md-3 oj-flex-item">
+<div id='chart-container'>
+    <div id="pieChart" data-bind="ojComponent: {
+            component: 'ojChart', 
+            type: 'pie', 
+            series: pieSeriesValue,
+            animationOnDisplay: 'auto',
+            animationOnDataChange: 'auto',
+            styleDefaults: {threeDEffect: ko.toJS(threeDValue)},
+            hoverBehavior: 'dim'
+        }"
+        style="max-width:500px;width:100%;height:350px;">
+    </div>
+    <!-- 2d/3d toggle button -->
+    <div id="radioButtonset2" class="oj-buttonset-width-auto" aria-label="Choose only one setting." aria-controls="pieChart"
+        data-bind="ojComponent: {component: 'ojButtonset', checked: threeDValue, optionChange: threeDValueChange}">
+        <!-- ko foreach: threeDOptions -->
+            <label data-bind="attr: {for: id}"></label>                               
+            <input type="radio" name="threeD"
+                   data-bind="value: value, attr: {id: id},
+                   ojComponent: {component: 'ojButton', label: label}"/>
+        <!-- /ko -->
+    </div>
+</div>
+       
+    </div>
+ <div class="oj-sm-12 oj-md-6 oj-flex-item">
+ <table id="tablep" summary="Department List" aria-label="Departments Table" 
+       data-bind="ojComponent:{  
+   component:'ojTable',
+   data:datasource,
+   columns:[  
+      {  
+         headerText:'empno',
+         field:'empno'
+      },
+      {  
+         headerText:'ename',
+         field:'DepartmentName'
+      },
+      {  
+         headerText:'job',
+         field:'LocationId'
+      },
+      {  
+         headerText:'hiredate',
+         field:'ManagerId'
+      },
+      {  
+         headerText:'mgr',
+         field:'mgr'
+      },
+      {  
+         headerText:'sal',
+         field:'sal'
+      },
+      {  
+         headerText:'comm',
+         field:'comm'
+      },
+      {  
+         headerText:'deptno',
+         field:'deptno', 
+                                           style: 'width: 20%'}], 
+                                rootAttributes: {'style':'width: 100%; height: 400px;'}}">
+</table>
+     </div>
+    <div class="oj-sm-12 oj-md-3 oj-flex-item">
+<div id='chart-container'>
+    <div id="barChart" data-bind="ojComponent: {
+            component: 'ojChart', 
+            type: 'bar', 
+            orientation: orientationValue,
+            stack: stackValue,
+            series: barSeriesValue, 
+            groups: barGroupsValue, 
+            animationOnDisplay: 'auto',
+            animationOnDataChange: 'auto',
+            hoverBehavior: 'dim'
+        }"
+         style="max-width:500px;width:100%;height:350px;">
+    </div>
+    <div id="myToolbar" aria-label="Chart Display Options Toolbar" aria-controls="barChart"
+       data-bind="ojComponent: {component:'ojToolbar'}"
+       style="max-width:500px;width:100%;">
+        <!-- vertical/horizontal toggle button -->
+        <div id="radioButtonset" data-bind="ojComponent: {component: 'ojButtonset', focusManagement:'none', checked: orientationValue, chroming: 'half'}" 
+             aria-label="Choose an orientation.">
+            <!-- ko foreach: orientationOptions -->
+              <label data-bind="attr: {for: id}"></label>
+              <input type="radio" name="orientation"
+                   data-bind="value: value, attr: {id: id},
+                   ojComponent: {component: 'ojButton', label: label, 
+                                     icons: {start: icon}, display: 'icons'}"/>
+            <!-- /ko -->
+        </div>
+        <span role="separator" aria-orientation="vertical" class="oj-toolbar-separator"></span>
+        <!-- unstacked/stacked toggle button -->
+        <div id="radioButtonset2" data-bind="ojComponent: {component: 'ojButtonset', focusManagement:'none', checked: stackValue, chroming: 'half'}" 
+             aria-label="Choose a stack setting.">
+            <!-- ko foreach: stackOptions -->
+              <label data-bind="attr: {for: id}"></label>
+              <input type="radio" name="stack"
+                   data-bind="value: value, attr: {id: id},
+                   ojComponent: {component: 'ojButton', label: label, 
+                                     icons: {start: icon}, display: 'icons'}"/>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+    </div>
+    </div>
+ 
+ 
+ 
+ <div class="oj-flex">
+    <div class="oj-flex-item oj-xl-3 oj-md-3 oj-sm-12">
+<div id='chart-container'>
+    <div id="pieChart" data-bind="ojComponent: {
+            component: 'ojChart', 
+            type: 'pie', 
+            series: pieSeriesValue,
+            animationOnDisplay: 'auto',
+            animationOnDataChange: 'auto',
+            styleDefaults: {threeDEffect: ko.toJS(threeDValue)},
+            hoverBehavior: 'dim'
+        }"
+        style="max-width:500px;width:100%;height:350px;">
+    </div>
+    <!-- 2d/3d toggle button -->
+    <div id="radioButtonset2" class="oj-buttonset-width-auto" aria-label="Choose only one setting." aria-controls="pieChart"
+        data-bind="ojComponent: {component: 'ojButtonset', checked: threeDValue, optionChange: threeDValueChange}">
+        <!-- ko foreach: threeDOptions -->
+            <label data-bind="attr: {for: id}"></label>                               
+            <input type="radio" name="threeD"
+                   data-bind="value: value, attr: {id: id},
+                   ojComponent: {component: 'ojButton', label: label}"/>
+        <!-- /ko -->
+    </div>
+</div>
+       
+    </div>
+ <div class="oj-flex-item oj-xl-6 oj-md-5 oj-sm-12">
+ <table id="tablep" summary="Department List" aria-label="Departments Table" 
+       data-bind="ojComponent:{  
+   component:'ojTable',
+   data:datasource,
+   columns:[  
+      {  
+         headerText:'empno',
+         field:'empno'
+      },
+      {  
+         headerText:'ename',
+         field:'DepartmentName'
+      },
+      {  
+         headerText:'job',
+         field:'LocationId'
+      },
+      {  
+         headerText:'hiredate',
+         field:'ManagerId'
+      },
+      {  
+         headerText:'mgr',
+         field:'mgr'
+      },
+      {  
+         headerText:'sal',
+         field:'sal'
+      },
+      {  
+         headerText:'comm',
+         field:'comm'
+      },
+      {  
+         headerText:'deptno',
+         field:'deptno', 
+                                           style: 'width: 20%'}], 
+                                rootAttributes: {'style':'width: 100%; height: 400px;'}}">
+</table>
+     </div>
+    <div class="oj-flex-item oj-xl-3 oj-md-3 oj-sm-12">
 <div id='chart-container'>
     <div id="barChart" data-bind="ojComponent: {
             component: 'ojChart', 

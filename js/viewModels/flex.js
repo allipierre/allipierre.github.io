@@ -104,30 +104,6 @@ self.DeptCol(new self.DeptCollection());
             {id: 'vertical', label: 'vertical', value: 'vertical', icon: 'oj-icon demo-bar-vert'},
             {id: 'horizontal', label: 'horizontal', value: 'horizontal', icon: 'oj-icon demo-bar-horiz'}
         ];
-        
-        
-        
-        
-        self.threeDValue = ko.observable('off');
-
-        /* chart data */
-        var pieSeries = [{name: "Series 1", items: [42]},
-                         {name: "Series 2", items: [55]},
-                         {name: "Series 3", items: [36]},
-                         {name: "Series 4", items: [10]},
-                         {name: "Series 5", items: [5]}];
-        
-        this.pieSeriesValue = ko.observableArray(pieSeries);
-        
-        /* toggle buttons*/
-        self.threeDOptions = [
-            {id: '2D', label: '2D', value: 'off', icon: 'oj-icon demo-2d'},
-            {id: '3D', label: '3D', value: 'on', icon: 'oj-icon demo-3d'}
-        ];
-        self.threeDValueChange = function(event, data) {
-            self.threeDValue(data.value);
-            return true;
-        }
       // Below are a subset of the ViewModel methods invoked by the ojModule binding
       // Please reference the ojModule jsDoc for additionaly available methods.
 
