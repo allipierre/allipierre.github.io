@@ -3,6 +3,7 @@
  The Universal Permissive License (UPL), Version 1.0
 oj-sm-only-hide oj-md-only-hide
  -->
+  <!-- ko if: dataReady --> 
 <div class="oj-hybrid-padding">
   <h3>Incidents Content Area</h3>
   <div>
@@ -56,9 +57,11 @@ oj-sm-only-hide oj-md-only-hide
        
     </div>
  <div class="oj-sm-12 oj-md-6 oj-flex-item">
+    
  <table id="tablep" summary="Department List" aria-label="Departments Table" 
        data-bind="ojComponent:{  
    component:'ojTable',
+                                selectionMode: {row: 'multiple', column: 'multiple'},
    data:datasource,
    columns:[  
       {  
@@ -67,11 +70,11 @@ oj-sm-only-hide oj-md-only-hide
       },
       {  
          headerText:'ename',
-         field:'DepartmentName'
+         field:'ename'
       },
       {  
          headerText:'job',
-         field:'LocationId'
+         field:'job'
       },
       {  
          headerText:'hiredate',
@@ -92,9 +95,29 @@ oj-sm-only-hide oj-md-only-hide
       {  
          headerText:'deptno',
          field:'deptno', 
-                                           style: 'width: 20%'}], 
+                                           style: 'width: 20%'}],
+            
+            optionChange: changeHandler, 
                                 rootAttributes: {'style':'width: 100%; height: 400px;'}}">
 </table>
+    
+     <template id="row_template">
+    <tr>
+        <td data-bind="text: empno">
+        </td>
+        <td data-bind="text: ename">
+        </td>
+        <td data-bind="text: job">
+        </td>
+        <td data-bind="text: $parent.formatDate(hiredate)">
+        </td>
+        <td data-bind="text: $parent.formatSal(sal)">
+        </td>
+    </tr>
+</template>
+     
+     <!--selected: <span data-bind="text: selectedItem"></span>-->
+     <span id="selectedDepartmentId">aa</span>
      </div>
     <div class="oj-sm-12 oj-md-3 oj-flex-item">
 <div id='chart-container'>
@@ -174,45 +197,18 @@ oj-sm-only-hide oj-md-only-hide
        
     </div>
  <div class="oj-sm-12 oj-md-6 oj-flex-item">
- <table id="tablep" summary="Department List" aria-label="Departments Table" 
-       data-bind="ojComponent:{  
-   component:'ojTable',
-   data:datasource,
-   columns:[  
-      {  
-         headerText:'empno',
-         field:'empno'
-      },
-      {  
-         headerText:'ename',
-         field:'DepartmentName'
-      },
-      {  
-         headerText:'job',
-         field:'LocationId'
-      },
-      {  
-         headerText:'hiredate',
-         field:'ManagerId'
-      },
-      {  
-         headerText:'mgr',
-         field:'mgr'
-      },
-      {  
-         headerText:'sal',
-         field:'sal'
-      },
-      {  
-         headerText:'comm',
-         field:'comm'
-      },
-      {  
-         headerText:'deptno',
-         field:'deptno', 
-                                           style: 'width: 20%'}], 
-                                rootAttributes: {'style':'width: 100%; height: 400px;'}}">
-</table>
+     <div id="pagingControlDemo">
+ <table id="table" summary="Department List" aria-label="Departments Table"
+           data-bind="ojComponent: {component: 'ojTable', data: pagingDatasource, columns:
+            [{headerText: 'Department Id', field: 'DepartmentId'},
+             {headerText: 'Department Name', field: 'DepartmentName'},
+             {headerText: 'Location Id', field: 'LocationId'},
+             {headerText: 'Manager Id', field: 'ManagerId'}], 
+             rootAttributes: {'style':'width: 100%;'}}">
+    </table>
+         <div id="paging" data-bind="ojComponent: {component: 'ojPagingControl', data: pagingDatasource, pageSize: 5}">
+    </div>
+         </div>
      </div>
     <div class="oj-sm-12 oj-md-3 oj-flex-item">
 <div id='chart-container'>
@@ -375,3 +371,534 @@ oj-sm-only-hide oj-md-only-hide
 </div>
     </div>
     </div>
+ 
+ 
+ 
+ 
+ <div class="oj-flex">
+    <div class="oj-flex-item oj-xl-3 oj-md-3 oj-sm-12">
+<div  id="picto-container">
+  <div id='pc1' data-bind="ojComponent:{
+      component: 'ojPictoChart',
+      items: pictoChartItems,
+      animationOnDisplay: 'auto',
+      columnCount: 3
+    }"
+    style="vertical-align:middle; margin-right:15px">
+  </div>
+  <div style="display:/*inline*/-block; vertical-align:middle; font-weight:bold">
+    <span style="color:#333333; font-size:1.1em">7 out of 10 college students</span><br>
+    <span style="color:#ed6647; font-size:1.3em">have sleep problems.</span>
+  </div>
+</div>
+       
+    </div>
+ <div class="oj-flex-item oj-xl-6 oj-md-5 oj-sm-12">
+ <div id="gauge10" 
+             data-bind="ojComponent: {
+             component: 'ojStatusMeterGauge', 
+             min: 0, 
+             max: 100, 
+             value: value10, 
+             orientation: 'circular',
+             plotArea: {rendered: 'on'},
+             metricLabel: {rendered: 'on'},
+             title: {text: 'Sales'},
+             readOnly: false
+             }" 
+             style=
+             "align:center;
+             margin-top:5px;
+             margin-bottom:5px;
+             height:80%;
+             width:80%;">
+        </div>
+     <p>
+     <input data-bind="value:value10"></input>
+     </div>
+    <div class="oj-flex-item oj-xl-3 oj-md-3 oj-sm-12">
+<div id='chart-container'>
+    <div id='thematicmap1'
+data-bind="ojComponent:{
+    component: 'ojThematicMap',
+    basemap: 'unitedKingdom',
+    mapProvider: mapProvider,
+    areaLayers: 
+      [{
+        layer: 'countries', labelDisplay: 'off',
+        areaDataLayer: {id: 'adl1', areas: [{id: 'a1', 'location': 'GBR', color: 'rgb(255, 181, 77)'}]}
+      }],
+    pointDataLayers: [{id: 'pdl1', markers: cities}]
+    }"
+style="width:100%; height:400px;"/>
+   
+    </div>
+    </div>
+         </div>
+      </div>
+ 
+ 
+ 
+ <table id="tableup" summary="Department List" aria-label="Departments Table"
+       data-bind="ojComponent: {component: 'ojTable', 
+                                data: datasourceup, 
+                                columnsDefault: {sortable: 'none'}, 
+                                columns: [{headerText: 'empno', 
+                                           field: 'empno'},
+                                          {headerText: 'ename', 
+                                           field: 'ename'},
+                                          {headerText: 'job', 
+                                           field: 'job'},
+                                          {headerText: 'hiredate', 
+                                           field: 'hiredate'},
+                                            {headerText: 'mgr', 
+                                           field: 'mgr'},
+                                             {headerText: 'sal', 
+                                           field: 'sal'},
+                                           {headerText: 'comm', 
+                                           field: 'comm'},
+                                   {headerText: 'deptno', 
+                                           field: 'deptno'}]}">
+</table>
+ 
+ <div id="datagrid-wrapper" class="oj-flex oj-flex-items-pad">  
+    <div class="oj-sm-12 oj-lg-6 oj-flex-item">
+    <div id="datagrid" style="height:400px; max-width:477px" 
+             aria-label="Data Grid CRUD Demo"
+             data-bind="ojComponent:
+             {
+                component:'ojDataGrid', 
+                data:dataSource, 
+                selectionMode:{row:'single'}, 
+                dnd:{reorder:{row:'enable'}},
+                header:
+                {
+                    column:
+                    {
+                        template: 'header_template', 
+                        style: 'width:100px'
+                    },
+                },
+                cell:
+                {
+                    template: 'cell_template',
+                    className: function(cellContext)
+                    {
+                        var key = cellContext['keys']['column'];
+                        if (key === 'SALARY')
+                        { 
+                            return 'oj-helper-justify-content-right';
+                        }
+                        return 'oj-helper-justify-content-flex-start';                          
+                    }
+                }
+            }"></div>
+    </div>
+    <div class="oj-sm-12 oj-lg-6 oj-flex-item">  
+        <div id="form-container" class="oj-form">
+            <label for="firstNameInput">First Name</label>
+            <input id="firstNameInput"
+                   data-bind="ojComponent: {
+                   component: 'ojInputText', 
+                   value:inputFirstName}"/> 
+            <label for="lastNameInput">Last Name</label>
+            <input id="lastNameInput"
+                   data-bind="ojComponent: {
+                   component: 'ojInputText', 
+                   value:inputLastName}"/>
+            <label for="inputHireDate">Date Hired</label>
+            <input id="inputHireDate"
+                   data-bind="ojComponent: {
+                   component: 'ojInputDate',
+                   value: inputHireDate}"/>
+            <label for="inputSalary">Salary</label>
+            <input id="inputSalary"
+                   data-bind="ojComponent: {
+                   component: 'ojInputNumber',
+                   max:30000, min:1000, step:100, value:inputSalary}"/>
+
+            <div class="oj-form-control-group" 
+                 aria-labelledby="submit group" role="group">
+                <button id="addbutton"
+                        data-bind="click: add, 
+                        ojComponent: { component: 'ojButton', 
+                        label: 'Add' }">
+                </button>
+
+                <button id="updateButton"
+                        data-bind="click: update, 
+                        ojComponent: { component: 'ojButton', 
+                        label: 'Update' }">
+                </button>          
+                <button id="removeButton"
+                        data-bind="click: remove, 
+                        ojComponent: { component: 'ojButton', 
+                        label: 'Remove' }">
+                </button>                                                                                                                
+                <button id="resetFields"
+                        data-bind="click: resetFields, 
+                        ojComponent: { component: 'ojButton', 
+                        label: 'Reset Fields' }">
+                </button>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<script type="text/html" id="header_template">
+    <!-- ko if: $key=='FIRST_NAME' -->            
+        <span data-bind="text: 'First Name'"></span>
+    <!-- /ko -->
+    <!-- ko if: $key=='LAST_NAME' -->
+        <span data-bind="text: 'Last Name'"></span>
+    <!-- /ko -->
+    <!-- ko if: $key=='HIRE_DATE' -->
+        <span data-bind="text: 'Date Hired'"></span>
+    <!-- /ko -->
+    <!-- ko if: $key=='SALARY' -->
+        <span data-bind="text: 'Salary'"></span>
+    <!-- /ko -->
+</script>	
+
+<script type="text/html" id="cell_template">
+    <!-- ko if: ($keys.column=='FIRST_NAME' || $keys.column=='LAST_NAME') -->
+        <span data-bind="text: $data"></span>
+    <!-- /ko -->
+    <!-- ko if: $keys.column=='HIRE_DATE' -->
+        <span data-bind="text: $parent.dateConverter.format($data)">
+        </span>
+    <!-- /ko -->
+    <!-- ko if: $keys.column=='SALARY' -->
+        <span data-bind="text: $parent.salaryConverter.format($data)">
+        </span>
+    <!-- /ko -->
+</script>
+ 
+ 
+
+<div id="datetime-converter-example">
+
+  <h3 class="oj-header-border">Date</h3>
+  <p>Converts between locale specific date string and Date value. </p>
+  
+  <p></p>
+  <b>Example 1</b>: Default converter on the 
+  <a href="#" onclick="demoGoLink(event, 'dateInputAndPicker', 'date'); return false;">
+    input date component</a> 
+    (when <code class="prettyprint">converter</code> option is not set).
+  <div class="oj-form oj-md-odd-cols-4 oj-md-labels-inline oj-sm-odd-cols-12">  
+    <div class="oj-flex">
+      <div class="oj-flex-item">
+        <label for="date1">input date with no converter</label>
+      </div>
+      <div class="oj-flex-item">
+        <input id="date1" type="text" name="date1" 
+          title="enter a date in your preferred format and we will attempt to figure it out"
+          data-bind="ojComponent:{
+            component:'ojInputDate', value: date,
+            datePicker: {changeMonth: 'none', changeYear: 'none'}}"/>
+      </div>
+    </div>
+  </div>
+  
+  <p></p>
+  <b>Example 2</b>: <code class="prettyprint">converter</code> option is set to -  
+    <code style="prettyprint">options: {year: 'numeric', month: 'long', day: 'numeric'}</code>
+  <div class="oj-form oj-md-odd-cols-4 oj-md-labels-inline">  
+    <div class="oj-flex"> 
+      <div class="oj-flex-item">
+        <label for="date2">input date</label>
+      </div>
+      <div class="oj-flex-item">
+        <input id="date2" type="text" name="date2" 
+          title="enter a date in your preferred format and we will attempt to figure it out"
+          data-bind="ojComponent:{
+            component:'ojInputDate', 
+            value: date, 
+            datePicker: {changeMonth: 'none', changeYear: 'none'},
+            converter: {
+              type:'datetime', 
+              options: {year: 'numeric', month: 'long', day: 'numeric'}}}"/>
+
+      </div>
+    </div>
+
+    <div class="oj-flex"> 
+      <div class="oj-flex-item">
+        <label for="text10">input text</label>
+      </div>
+      <div class="oj-flex-item">
+        <input id="text10" type="text" name="text10" 
+          title="enter a date in your preferred format and we will attempt to figure it out"
+          data-bind="ojComponent:{
+            component:'ojInputText', 
+            value: date, 
+            converter: {
+              type:'datetime', 
+              options: {
+                year: 'numeric', month: 'long', day: 'numeric'}}}"/>
+
+      </div>
+    </div>
+  </div>
+  
+  <p></p>
+  
+  <b>Example 3</b>: <code style="prettyprint">converter</code> option is set to - 
+    <code style="prettyprint">options: {formatType: 'date', dateFormat: 'medium'}</code>
+  <div class="oj-form oj-md-odd-cols-4 oj-md-labels-inline">  
+    <div class="oj-flex"> 
+      <div class="oj-flex-item">
+        <label for="date3">input date</label>
+      </div>
+      <div class="oj-flex-item">
+        <input id="date3" type="text" name="date3" 
+          title="enter a date in your preferred format and we will attempt to figure it out"
+          data-bind="ojComponent:{
+            component:'ojInputDate', value: date,
+            converter: {
+              type:'datetime', 
+              options: {formatType:'date', dateFormat:'medium'}}}"/>
+      </div>
+    </div>
+    <div class="oj-flex"> 
+      <div class="oj-flex-item">
+        <label for="text11">input text</label>
+      </div>
+      <div class="oj-flex-item">
+        <input id="text11" type="text" name="text11" 
+          title="enter a date in your preferred format and we will attempt to figure it out"
+          data-bind="ojComponent:{
+            component:'ojInputText', 
+            value: date,
+            converter: {
+              type:'datetime', 
+              options: {formatType:'date', dateFormat:'medium'}}}"/>
+      </div>
+    </div>
+  </div>
+  
+  <h3 class="oj-header-border">Date and Time</h3>
+  <p>Converts between locale specific date and time string and Date value. </p>
+  
+  <p></p>
+  <b>Example 1</b>: Default converter on the 
+    <a href="#" onclick="demoGoLink(event, 'dateInputAndPicker', 'datetime'); return false;">
+      input dateTime component</a> 
+    (when <code class="prettyprint">converter</code> option is not set).
+  <div class="oj-form oj-md-odd-cols-4 oj-md-labels-inline">  
+    <div class="oj-flex">
+      <div class="oj-flex-item">
+        <label for="datetime1">input datetime with no converter</label>
+      </div>
+      <div class="oj-flex-item">
+        <input id="datetime1" type="text" name="datetime1" 
+          title="enter a date in your preferred format and we will attempt to figure it out"
+          data-bind="ojComponent:{
+            component:'ojInputDateTime', value: datetime}"/>
+      </div>
+    </div>
+  </div>
+  
+  <p></p>
+  <b>Example 2</b>: <code style="prettyprint">converter</code> option is set to - 
+    <code class="prettyprint">options : {formatType: 'datetime', dateFormat: 'short', timeFormat: 'short'}</code>.
+  <div class="oj-form oj-md-odd-cols-4 oj-md-labels-inline">  
+
+    <div class="oj-flex"> 
+      <div class="oj-flex-item">
+        <label for="datetime2">input datetime</label>
+      </div>
+      <div class="oj-flex-item">
+        <input id="datetime2" type="text" name="datetime2" 
+          title="enter a date in your preferred format and we will attempt to figure it out"
+          data-bind="ojComponent:{
+            component:'ojInputDateTime', value: datetime,
+            converter: {
+              type:'datetime', 
+              options: {formatType: 'datetime', dateFormat: 'short', 
+                timeFormat: 'short'}}}"/>
+      </div>
+    </div>
+    <div class="oj-flex"> 
+      <div class="oj-flex-item">
+        <label for="text20">input text</label>
+      </div>
+      <div class="oj-flex-item">
+        <input id="text20" type="text" name="text20" 
+          title="enter a date in your preferred format and we will attempt to figure it out"
+          data-bind="ojComponent:{
+            component:'ojInputText', 
+            value: datetime,
+            converter: {
+              type:'datetime', 
+              options: {
+                formatType: 'datetime', 
+                dateFormat: 'short', 
+                timeFormat: 'short'}}}"/>
+      </div>
+    </div>
+  </div>
+  
+  <p></p>
+  <b>Example 3</b>: <code style="prettyprint">converter</code> option is set to - 
+    <code class="prettyprint">options : {pattern: 'MMM d, y, h:mm:ss a'}</code>
+  <div class="oj-form oj-md-odd-cols-4 oj-md-labels-inline">  
+
+    <div class="oj-flex"> 
+      <div class="oj-flex-item">
+        <label for="datetime3">input datetime</label>
+      </div>
+      <div class="oj-flex-item">
+        <input id="datetime3" type="text" name="datetime3" 
+          title="enter a date in your preferred format and we will attempt to figure it out"
+          data-bind="ojComponent:{
+            component:'ojInputDateTime', 
+            value: datetime,
+            converter: {
+              type:'datetime', 
+              options: {pattern: 'MMM d, y, h:mm:ss a'}}}"/>
+      </div>
+    </div>
+
+    <div class="oj-flex"> 
+      <div class="oj-flex-item">
+        <label for="text21">input text</label>
+      </div>
+      <div class="oj-flex-item">
+        <input id="text21" type="text" name="text21" 
+          title="enter a date in your preferred format and we will attempt to figure it out"
+          data-bind="ojComponent:{
+            component:'ojInputText', 
+            value: datetime,
+            converter: {
+              type:'datetime', 
+              options: {pattern: 'MMM d, y, h:mm:ss a'}}}"/>
+      </div>
+    </div>    
+  </div>    
+  
+  
+  <h3 class="oj-header-border">Time</h3>
+  <p>Converts between locale specific time string and Date value. </p>
+  
+  <p></p>
+  <b>Example 1</b>: Default converter on the 
+    <a href="#" onclick="demoGoLink(event, 'dateInputAndPicker', 'time'); return false;">
+      input time component</a> 
+    (when <code class="prettyprint">converter</code> option is not set).
+  <div class="oj-form oj-md-odd-cols-4 oj-md-labels-inline">  
+    <div class="oj-flex">
+      <div class="oj-flex-item">
+        <label for="time1">input time with no converter</label>
+      </div>
+      <div class="oj-flex-item">
+        <input id="time1" type="text" name="time1" 
+          title="enter a date in your preferred format and we will attempt to figure it out"
+          data-bind="ojComponent:{
+            component:'ojInputTime', value: time}"/>
+      </div>
+    </div>    
+  </div>
+  
+  <p></p>
+  <b>Example 2</b>: <code style="prettyprint">converter</code> option set to - 
+    <code class="prettyprint">options : {formatType: 'time', timeFormat: 'full'}</code>.
+  <div class="oj-form oj-md-odd-cols-4 oj-md-labels-inline">  
+
+    <div class="oj-flex"> 
+      <div class="oj-flex-item">
+        <label for="time2">input time</label>
+      </div>
+      <div class="oj-flex-item">
+        <input id="time2" type="text" name="time2"  title="enter a time"
+          data-bind="ojComponent:{
+            component:'ojInputTime', 
+            value: time,
+            converter: {
+              type:'datetime', 
+              options: {formatType: 'time', timeFormat: 'full'}}}"/>
+      </div>
+    </div>
+
+    <div class="oj-flex"> 
+      <div class="oj-flex-item">
+        <label for="text30">input text</label>
+      </div>
+      <div class="oj-flex-item">
+        <input id="text30" type="text" name="text30"  title="enter a time"
+          data-bind="ojComponent:{
+            component:'ojInputText', 
+            value: time,
+            converter: {
+              type:'datetime', 
+              options: {formatType: 'time', timeFormat: 'full'}}}"/>
+      </div>
+    </div>    
+  </div>
+  
+  <p></p>
+  <b>Example 3</b>: <code style="prettyprint">converter</code> option set to - 
+    <code class="prettyprint">options : {hour: '2-digit', minute: '2-digit', second: '2-digit'}</code>.
+    <div class="oj-form oj-md-odd-cols-4 oj-md-labels-inline">  
+
+      <div class="oj-flex"> 
+        <div class="oj-flex-item">
+          <label for="time3">input time</label>
+        </div>
+        <div class="oj-flex-item">
+          <input id="time3" type="text" name="time3"  title="enter a time"
+            data-bind="ojComponent:{
+              component:'ojInputTime', 
+              value: time,
+              converter: {type:'datetime', 
+                options: {
+                  hour: '2-digit', 
+                  minute: '2-digit', 
+                  second: '2-digit'}}}"/>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+
+<div id="validator-example" class="oj-form oj-md-odd-cols-4 oj-md-labels-inline oj-sm-odd-cols-12">
+  <div class="oj-flex"> 
+    <div class="oj-flex-item">
+      <label for="dateTimeRange1">'min' attribute and 'max' option</label>
+    </div>
+    <div class="oj-flex-item">
+      <input id="dateTimeRange1" type="date" name="dateTimeRange1" 
+        min="2000-01-01T08:00:00.000" 
+        title="enter a date that falls in the current millenium and not greater than today's date."
+        data-bind="ojComponent:{
+          component:'ojInputDate', 
+          value: dateValue1,
+          max: todayIsoDate}"/>
+    </div>
+  </div>
+
+  <div class="oj-flex"> 
+    <div class="oj-flex-item">
+      <label for="dateTimeRange2">'dateTimeRange' type in 'validators' option</label>
+    </div>
+    <div class="oj-flex-item">
+      <input id="dateTimeRange2" type="date" name="dateTimeRange2" 
+        title="enter a date in your preferred format and we will attempt to figure it out"
+        data-bind="ojComponent:{
+          component:'ojInputDate', 
+          value: dateValue2,
+          validators: [{
+            type: 'dateTimeRange', 
+            options: {
+              max: todayIsoDate(), 
+              min: milleniumStartIsoDate(),
+              hint: {
+                'inRange': 'Enter a date that falls in the current millennium.'}}}]}"/>
+    </div>
+  </div>
+</div>
+ <!-- /ko -->  

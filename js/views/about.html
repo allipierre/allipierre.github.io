@@ -14,6 +14,8 @@
  <table id="table" summary="Department List" aria-label="Departments Table"
        data-bind="ojComponent: {component: 'ojTable', 
                                 data: datasource, 
+                                selection:currentSelection,
+                                selectionMode: {row: 'single', column: 'none'},
                                 columnsDefault: {sortable: 'enabled'}, 
                                 columns: [{headerText: 'Department Id', 
                                            field: 'DepartmentId'},
@@ -25,6 +27,8 @@
                                            style: 'width: 20%'}], 
                                 rootAttributes: {'style':'width: 100%; height:100%;'}}">
 </table>
+<br/><br/>
+     selected: <span data-bind="text: selectedItem"></span>
  <p>
 <h3>Simple Table which has percent width and height styling</h3>
  

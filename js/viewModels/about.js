@@ -10,7 +10,7 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
 
         function AboutViewModel() {
             var self = this;
-
+             self.currentSelection=ko.observable();
             var self = this;
             var deptArray = [{
                     DepartmentId: 1001,
@@ -246,6 +246,15 @@ define(['ojs/ojcore', 'knockout', 'jquery', 'ojs/ojknockout', 'promise', 'ojs/oj
             self.inputDepartmentName = ko.observable();
             self.inputLocationId = ko.observable();
             self.inputManagerId = ko.observable();
+            
+             self.selectedItem = ko.pureComputed(function(ctx){
+            if(self.currentSelection()){
+                var value=deptArray[self.currentSelection()[0].startIndex.row];
+                return value.DepartmentName +value.DepartmentId;
+            }else{
+                return 'nothing';
+            }
+        });
             // Below are a subset of the ViewModel methods invoked by the ojModule binding
             // Please reference the ojModule jsDoc for additionaly available methods.
 
