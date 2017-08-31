@@ -12,9 +12,9 @@
 }
 
 
-.demo-oracle-icon:before {
-    content: url("http://192.168.161.178:7001/ords/pitss_con_lite/r/109/files/static/v3431/pitss_small.gif")
-}
+/*.demo-oracle-icon:before {
+    content: url("")
+}*/
 
 .demo-oracle-icon {
     width: 47px;
